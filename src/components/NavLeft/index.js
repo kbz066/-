@@ -13,7 +13,7 @@ export default class NavLeft extends Component {
     constructor() {
         super();
         this.state = {
-            menuData: []
+        
         }
     }
 
