@@ -43,7 +43,7 @@ export default class Header extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="hender-main">
 
 
                 <Row className="hender">
