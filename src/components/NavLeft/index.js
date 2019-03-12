@@ -41,7 +41,6 @@ export default class NavLeft extends Component {
 
             }
 
-            console.log(item.key)
             return (
           
 
