@@ -25,7 +25,7 @@ export default class Admin extends Component {
                         <Header />
 
                         <Row className="content">
-                            <Home />
+                            {this.props.children}
                         </Row>
                         <Footer />
 

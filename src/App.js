@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 
 import './App.less';
-import { Button } from 'antd'
+
+import { HashRouter, Route, Switch } from 'react-router-dom'
+import Login from './pages/login'
+import Buttons from './pages/ui/buttons'
 
 
+import Admin from './admin'
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Button type="primary">Primary</Button>
-      </div>
+      <HashRouter>
+        <Switch>
+          <Route path="/admin" render={()=><Admin>
+              <Route  path="/admin/ui/buttons"  component={Buttons}/>            
+          </Admin>} />
+          <Route path="/login" component={Login} />
+        </Switch>
+      </HashRouter>
+
     );
   }
 }
