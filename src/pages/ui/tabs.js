@@ -57,7 +57,7 @@ export default class MyTabs extends Component {
                 activeKey = panes[0].key;
             }
         }
-        this.setState({ panes, activeKey });
+        this.setState({ panes });
     }
 
     handleChange = (activeKey) => {
@@ -66,7 +66,7 @@ export default class MyTabs extends Component {
     }
 
     onEdit = (targetKey, action) => {
-        console.log(this, targetKey, action)
+
 
         this[action](targetKey);
     }
