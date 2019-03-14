@@ -10,6 +10,8 @@ import Loadings from './pages/ui/loadings'
 import Notifications from './pages/ui/notifications'
 import Messages from './pages/ui/messages'
 import Tabs from './pages/ui/tabs'
+import Gallerys from './pages/ui/gallerys'
+import Carousels from './pages/ui/carousels'
 
 
 import Admin from './admin'
@@ -25,6 +27,9 @@ class App extends Component {
               <Route  path="/admin/ui/notification"  component={Notifications}/>   
               <Route  path="/admin/ui/messages"  component={Messages}/>   
               <Route  path="/admin/ui/tabs"  component={Tabs}/>   
+              <Route  path="/admin/ui/gallery"  component={Gallerys}/>   
+
+              <Route  path="/admin/ui/carousel"  component={Carousels}/>   
           </Admin>} />
           <Route path="/login" component={Login} />
         </Switch>
