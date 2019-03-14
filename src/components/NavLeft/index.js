@@ -4,9 +4,11 @@ import menuList from '../../config/menuConfig';
 import { Menu } from 'antd';
 import "../NavLeft/index.less"
 import { NavLink } from 'react-router-dom'
+import logoUrl from "../../resource/assets/logo.svg"
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
+
 
 
 
@@ -62,7 +64,7 @@ export default class NavLeft extends Component {
         return (
             <div>
                 <div className="logo">
-                    <img src="../../resource/assets/logo.svg" />
+                    <img src={logoUrl}/>
                     <h1>React MS</h1>
                 </div>
 
