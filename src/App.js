@@ -12,7 +12,8 @@ import Messages from './pages/ui/messages'
 import Tabs from './pages/ui/tabs'
 import Gallerys from './pages/ui/gallerys'
 import Carousels from './pages/ui/carousels'
-
+import FormLogin from './pages/form/formLogin'
+import FormRegister from './pages/form/formRegister'
 
 import Admin from './admin'
 class App extends Component {
@@ -28,8 +29,11 @@ class App extends Component {
               <Route  path="/admin/ui/messages"  component={Messages}/>   
               <Route  path="/admin/ui/tabs"  component={Tabs}/>   
               <Route  path="/admin/ui/gallery"  component={Gallerys}/>   
-
               <Route  path="/admin/ui/carousel"  component={Carousels}/>   
+
+              <Route  path="/admin/form/login"  component={FormLogin}/>   
+              <Route  path="/admin/form/reg"  component={FormRegister}/>   
+
           </Admin>} />
           <Route path="/login" component={Login} />
         </Switch>
