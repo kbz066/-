@@ -26,14 +26,24 @@ export default class Axios {
     static  ajax(options){
 
         const baseURL=" https://www.easy-mock.com/mock/5c8c5ac2ee611359cdbb4840/example"
+
+
+        if(options.data&&options.data.isShowLoading===true){
+            document.getElementById("ajaxLoading").style.display="block"
+        }
         return new Promise(function(resolve, reject){
             axios({
                 method: options.type,
                 url: options.url,
                 timeout: 5000,
+                params:options.data,
                 baseURL
             }).then((res)=>{
                 
+                if(options.data&&options.data.isShowLoading===true){
+                    document.getElementById("ajaxLoading").style.display="none"
+                }
+
                 if(res.status=="200"){
 
 
