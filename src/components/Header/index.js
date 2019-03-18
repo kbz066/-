@@ -15,7 +15,7 @@ export default class Header extends Component {
             userName: "admin"
         }
 
-        setInterval(() => {
+         this.timeTimer= setInterval(() => {
             let time = utils.formatFtt(new Date())
             this.setState({
                 sysTime: time
@@ -23,6 +23,9 @@ export default class Header extends Component {
 
         }, 1000);
         this.getWeatherApiData()
+    }
+    componentWillUnmount(){
+        clearInterval(this.timeTimer)
     }
 
     getWeatherApiData = async () => {

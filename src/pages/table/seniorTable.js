@@ -5,25 +5,24 @@ import Axios from '../../axios/axios';
 
 
 
-
-
-
-
 const columns = [
     {
         title: "id",
         dataIndex: "id",
+        width: 90,
         align: "center"
     },
     {
         title: "用户名",
         dataIndex: "userName",
+        width: 90,
         align: "center"
 
     },
     {
         title: "性别",
         dataIndex: "sex",
+        width: 90,
         align: "center",
 
         render: (sex) => {
@@ -39,6 +38,7 @@ const columns = [
     {
         title: "状态",
         dataIndex: "state",
+        width: 120,
         align: "center",
         render: (state) => {
             let config = {
@@ -55,6 +55,7 @@ const columns = [
     {
         title: "爱好",
         dataIndex: "interest",
+        width: 90,
         render: (interest) => {
             let config = {
                 "0": "打游戏",
@@ -72,6 +73,7 @@ const columns = [
     {
         title: "是否以婚",
         dataIndex: "married",
+        width: 90,
         render: (married) => {
             let config = {
 
@@ -85,17 +87,122 @@ const columns = [
     },
     {
         title: "生日",
+        width: 120,
         dataIndex: "birthday"
     },
     {
         title: "联系地址",
+        width: 120,
         dataIndex: "address"
     },
     {
         title: "早起时间",
+        width: 90,
         dataIndex: "time"
     },
 ]
+
+
+
+const columns2 = [
+    {
+        title: "id",
+        dataIndex: "id",
+        width: 90,
+        fixed:"left",
+        align: "center"
+    },
+    {
+        title: "用户名",
+        dataIndex: "userName",
+  
+        align: "center"
+
+    },
+    {
+        title: "性别",
+        dataIndex: "sex",
+  
+        align: "center",
+
+        render: (sex) => {
+            let config = {
+                "1": "男",
+                "2": "女"
+
+            }
+            return config[sex]
+        }
+
+    },
+    {
+        title: "状态",
+        dataIndex: "state",
+   
+        align: "center",
+        render: (state) => {
+            let config = {
+                "0": "初级工程师",
+                "1": "中级工程师",
+                "2": "高级工程师",
+                "3": "资深工程师",
+
+            }
+            return config[state]
+        }
+    },
+
+    {
+        title: "爱好",
+        dataIndex: "interest",
+   
+        render: (interest) => {
+            let config = {
+                "0": "打游戏",
+                "1": "写代码",
+                "2": "看书",
+                "3": "听歌",
+                "4": "下棋",
+                "5": "跑步",
+                "6": "踢球",
+
+            }
+            return config[interest]
+        }
+    },
+    {
+        title: "是否以婚",
+        dataIndex: "married",
+    
+        render: (married) => {
+            let config = {
+
+                "1": "已婚",
+                "2": "未婚",
+
+
+            }
+            return config[married]
+        }
+    },
+    {
+        title: "生日",
+ 
+        dataIndex: "birthday"
+    },
+    {
+        title: "联系地址",
+
+        dataIndex: "address"
+    },
+    {
+        title: "早起时间",
+        width: 90,
+        fixed:"right",
+        dataIndex: "time"
+    },
+]
+
 
 const dataSource = [
     {
@@ -132,21 +239,16 @@ const dataSource = [
         "time": "23:15:29"
     }
 ]
+export default class SeniorTable extends Component{
 
-
-
-
-export default class BasicsTable extends Component {
-
-    currentPage=0
 
     
     state = {
-        selectedRowKeys: [1]
+      
     }
 
     componentDidMount() {
-        this.request()
+      // this.request()
     }
 
 
@@ -167,107 +269,35 @@ export default class BasicsTable extends Component {
         })
     }
 
-
-
-    onRowClick = (record, index) => {
-        let selectKey = [index];
-        this.setState({
-            selectedRowKeys: selectKey,
-
-        })
-
-    }
-    render() {
-        let rowSelection = {
-
-            type: 'radio',
-            selectedRowKeys: this.state.selectedRowKeys,
-            onChange: (selectedRowKeys, selectedRows) => {
-                console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-            },
-            // getCheckboxProps: record => ({
-            //     disabled: record.name === 'Disabled User', // Column configuration not to be checked
-            //     name: record.name,
-            // }),
-        };
-
-        let _this=this
+    render(){
         return (
             
             <div>
-                <Card title="基础表格" >
+  
+
+                <Card title="头部固定">
                     <Table
-                        bordered
                         rowKey="id"
+                        bordered
+
                         columns={columns}
+                        dataSource={this.state.dataSource}
+                        scroll={{ y: 240 }}
+                    />
+                </Card>
+
+                <Card title="列固定">
+                    <Table
+                        rowKey="id"
+                        bordered
+
+                        columns={columns2}
                         dataSource={dataSource}
-                        pagination={false}
+                        scroll={{ x: 1200 }}
                     />
                 </Card>
 
-                <Card title="Mock表格">
-                    <Table
-                        rowKey="id"
-                        bordered
-
-                        columns={columns}
-                        dataSource={this.state.dataSource}
-                    />
-                </Card>
-
-                <Card title="Mock表格-单选">
-
-                    <Table
-                        rowKey="id"
-                        bordered
-                        rowSelection={rowSelection}
-                        columns={columns}
-
-                        onRow={(record, index) => {
-                            return {
-                                onClick: (event) => {
-                                    this.onRowClick(record, index)
-
-                                },       // 点击行
-
-                            };
-                        }}
-                        dataSource={this.state.dataSource}
-                    />
-                </Card>
-
-
-                <Card title="Mock表格-多选">
-
-                    <Table
-                        rowKey="id"
-                        bordered
-            
-                        columns={columns}
-
-                        dataSource={this.state.dataSource}
-                    />
-                </Card>
-
-                <Card title="Mock表格-分页">
-
-                    <Table
-                        rowKey="id"
-                        bordered
-             
-                        columns={columns}
-                        pagination={
-                            {
-                                total:this.state.total,
-                                onChange:(page)=>{
-                                    this.currentPage=page;
-                                    _this.request()
-                                }
-                            }
-                        }
-                        dataSource={this.state.dataSource}
-                    />
-                </Card>
+                
             </div>
         );
     }

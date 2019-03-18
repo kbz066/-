@@ -16,6 +16,7 @@ import FormLogin from './pages/form/formLogin'
 import FormRegister from './pages/form/formRegister'
 
 import BasicsTable from './pages/table/basicsTable'
+import SeniorTable from './pages/table/seniorTable'
 
 import Admin from './admin'
 class App extends Component {
@@ -37,6 +38,8 @@ class App extends Component {
               <Route  path="/admin/form/reg"  component={FormRegister}/>   
 
               <Route  path="/admin/table/basic"  component={BasicsTable}/>   
+
+              <Route  path="/admin/table/hight"  component={SeniorTable}/>   
 
           </Admin>} />
           <Route path="/login" component={Login} />

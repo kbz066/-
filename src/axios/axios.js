@@ -25,7 +25,7 @@ export default class Axios {
 
     static  ajax(options){
 
-        const baseURL=" https://www.easy-mock.com/mock/5c8c5ac2ee611359cdbb4840/example"
+        const baseURL=" https://www.easy-mock.com/mock/5c8c9258800fbb7305fd8117/dancheApi"
 
 
         if(options.data&&options.data.isShowLoading===true){
@@ -60,6 +60,11 @@ export default class Axios {
                     reject(res) 
                 }
 
+            })
+            .catch((e)=>{
+                if(options.data&&options.data.isShowLoading===true){
+                    document.getElementById("ajaxLoading").style.display="none"
+                }
             })
         })
     }
