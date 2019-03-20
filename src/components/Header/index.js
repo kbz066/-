@@ -16,7 +16,7 @@ export default class Header extends Component {
         }
 
          this.timeTimer= setInterval(() => {
-            let time = utils.formatFtt(new Date())
+            let time = utils.formatTime(new Date())
             this.setState({
                 sysTime: time
             })
