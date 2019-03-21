@@ -19,6 +19,7 @@ import BasicsTable from './pages/table/basicsTable'
 import SeniorTable from './pages/table/seniorTable'
 import RichText from './pages/rich/index'
 import City from './pages/city/index'
+import Order from './pages/order/index'
 
 import Admin from './admin'
 class App extends Component {
@@ -44,7 +45,7 @@ class App extends Component {
               <Route  path="/admin/table/hight"  component={SeniorTable}/>   
               <Route  path="/admin/rich"  component={RichText}/>   
               <Route  path="/admin/city"  component={City}/>   
-              
+              <Route  path="/admin/order"  component={Order}/>   
 
           </Admin>} />
           <Route path="/login" component={Login} />

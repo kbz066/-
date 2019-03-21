@@ -23,6 +23,7 @@ export default class City extends Component {
 
 
     getCityList = () => {
+
         Axios.ajax({
             type: "get",
             url: "city/list",

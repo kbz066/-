@@ -5,7 +5,7 @@ import Footer from './components/Footer/index'
 import Header from './components/Header/index'
 import NavLeft from './components/NavLeft/index'
 import "./style/common.less"
-import Home from './pages/home/index'
+
 
 
 
