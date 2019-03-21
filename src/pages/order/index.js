@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Form, Button, Select, DatePicker, Table } from 'antd';
+import { Card, Form, Button, Select, DatePicker, Table, Modal } from 'antd';
 import Axios from '../../axios/axios';
 
 
@@ -123,6 +123,17 @@ export default class Order extends Component {
                     />
  
                 </div>
+                <Modal
+                          title="Basic Modal"
+                          visible={this.state.visible}
+                          onOk={this.handleOk}
+                          onCancel={()=>{
+                              this.setState({
+                                  
+                              })
+                          }}
+                          content={this.state.errorContent}
+                />
 
             </div>
         );
