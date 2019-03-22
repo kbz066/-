@@ -110,6 +110,13 @@ export default class Order extends Component {
         })
     }
 
+    handleOpenOrderDetails=()=>{
+
+        window.open("/#/order/details","_blank")
+
+    }
+
+
     render() {
         const rowSelection = {
             type: "radio",
@@ -132,7 +139,8 @@ export default class Order extends Component {
             },
             {
                 title: '用户名',
-                dataIndex: 'user_name'
+                dataIndex: 'user_name',
+                
             },
             {
                 title: '手机号',
@@ -185,14 +193,14 @@ export default class Order extends Component {
         
       
         }
-
+    
         return (
             <div>
                 <Card >
                     <TopForm handleQuery={this.getOrderList} />
                 </Card>
                 <Card style={{ marginTop: 10 }}>
-                    <Button type="primary">订单详情</Button>
+                    <Button type="primary" onClick={this.handleOpenOrderDetails}>订单详情</Button>
                     <Button type="primary" style={{ marginLeft: 20 }} onClick={this.handleCloseOrder}>结束订单</Button>
                 </Card>
                 <div>
