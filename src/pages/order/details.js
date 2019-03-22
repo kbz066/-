@@ -10,7 +10,7 @@ export default class Details extends Component{
         return(
             <Row className="header">
                 <Col >
-                    
+                    <img src={require("../../resource/assets/logo.svg")}/>
                 </Col>
             </Row>
         );
