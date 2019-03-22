@@ -33,7 +33,7 @@ export default class Axios {
         }
         return new Promise(function(resolve, reject){
             axios({
-                method: options.type,
+                method: options.type||"get",
                 url: options.url,
                 timeout: 5000,
                 params:options.data,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Form, Button, Select, DatePicker, Table, Modal } from 'antd';
+import { Card, Form, Button, Select, DatePicker, Table, Modal, message } from 'antd';
 import Axios from '../../axios/axios';
 
 
@@ -9,15 +9,22 @@ const Option = Select.Option;
 export default class Order extends Component {
 
 
-    state={}
+    state = {
+        orderConfirmVisble: false,
+        record: {},
+        selectedRowKeys: [],
+        closeOrderInfo: {}
 
-    componentDidMount(){
+
+    }
+
+    componentDidMount() {
         this.getOrderList()
     }
 
     getOrderList = (param) => {
 
-        console.log("object          ",param)
+
         Axios.ajax({
             type: "get",
             url: "order/list",
@@ -29,22 +36,95 @@ export default class Order extends Component {
 
         }).then((res) => {
 
-        
+
             this.setState({
                 dataSource: res.data.result.item_list,
                 total_count: res.data.result.total_count,
                 page_size: res.data.result.page_size,
-      
+
             })
         })
     }
 
-    render() {
+    handleCloseOrder = () => {
 
+
+
+        let { selectedRowKeys, record } = this.state
+        let modalContent = {
+            title: "温馨提示"
+        }
+
+
+        if (selectedRowKeys.length == 0) {
+            modalContent.content = "请选择行程中的订单"
+        } else if (record.status != 1) {
+            modalContent.content = "该订单行程已结束"
+        } else {
+
+            Axios.ajax({
+                type: "get",
+                url: '/order/ebike_info',
+                data: {
+                    orderId: record.id
+                }
+            }).then((res) => {
+                this.setState({
+                    closeOrderInfo: res.data.result,
+                    orderConfirmVisble: true,
+                })
+            })
+            return
+        }
+
+        Modal.info({
+            ...modalContent
+        })
+
+        console.log("         ", selectedRowKeys)
+
+
+    }
+
+
+
+
+    onRowClick = (record, index) => {
+        console.log("index       ", index, "     ", record)
+        this.setState({
+            selectedRowKeys: [index],
+            record
+        })
+    }
+
+
+    handleCloseState=()=>{
+        Axios.ajax({
+            url: '/order/ebike_info',
+        })
+        .then((res)=>{
+            this.setState({
+                orderConfirmVisble:false
+            })
+            message.success("结束成功")
+        })
+    }
+
+    render() {
+        const rowSelection = {
+            type: "radio",
+            onChange: (electedRowKeys, selectedRows) => {
+                this.setState({
+                    selectedRowKeys: electedRowKeys,
+                    record: selectedRows[0]
+                })
+            },
+            selectedRowKeys: this.state.selectedRowKeys
+        }
         const columns = [
             {
-                title:'订单编号',
-                dataIndex:'order_sn'
+                title: '订单编号',
+                dataIndex: 'order_sn'
             },
             {
                 title: '车辆编号',
@@ -61,8 +141,8 @@ export default class Order extends Component {
             {
                 title: '里程',
                 dataIndex: 'distance',
-                render(distance){
-                    return distance/1000 + 'Km';
+                render(distance) {
+                    return distance / 1000 + 'Km';
                 }
             },
             {
@@ -72,8 +152,8 @@ export default class Order extends Component {
             {
                 title: '状态',
                 dataIndex: 'status',
-                render:(status)=>{
-                    return status==1 ? "进行中":"行程结束"
+                render: (status) => {
+                    return status == 1 ? "进行中" : "行程结束"
                 }
             },
             {
@@ -93,18 +173,32 @@ export default class Order extends Component {
                 dataIndex: 'user_pay'
             }
         ]
+
+        const formItemLayout = {
+            labelCol:{
+                span:5
+            },
+            wrapperCol:{
+                span:19
+            },
+            labelAlign:"right",
+        
+      
+        }
+
         return (
             <div>
                 <Card >
-                    <TopForm handleQuery={this.getOrderList}/>
+                    <TopForm handleQuery={this.getOrderList} />
                 </Card>
                 <Card style={{ marginTop: 10 }}>
                     <Button type="primary">订单详情</Button>
-                    <Button type="primary" style={{marginLeft:20}} >结束订单</Button>
+                    <Button type="primary" style={{ marginLeft: 20 }} onClick={this.handleCloseOrder}>结束订单</Button>
                 </Card>
                 <div>
                     <Table
                         rowKey="id"
+                        rowSelection={rowSelection}
                         bordered
                         pagination={
                             {
@@ -116,24 +210,49 @@ export default class Order extends Component {
                             item.align = "center"
                             return item
                         })}
-                        dataSource={this.state.dataSource
+                        onRow={(record, index) => {
 
-                        }
+                            return {
+                                onClick: (event) => {
+                                    this.onRowClick(record, index)
+
+                                },       // 点击行
+
+                            };
+                        }}
+                        dataSource={this.state.dataSource}
 
                     />
- 
+
                 </div>
                 <Modal
-                          title="Basic Modal"
-                          visible={this.state.visible}
-                          onOk={this.handleOk}
-                          onCancel={()=>{
-                              this.setState({
-                                  
-                              })
-                          }}
-                          content={this.state.errorContent}
-                />
+                    title="结束订单"
+                    visible={this.state.orderConfirmVisble}
+                    width={600}
+                    onOk={this.handleCloseState}
+                    onCancel={() => {
+                        this.setState({
+                            orderConfirmVisble: false
+                        })
+                    }}
+                >
+
+                    <Form layout="horizontal"    {...formItemLayout} >
+                        <FormItem label="车辆编号" >
+                            {this.state.closeOrderInfo.bike_sn}
+                        </FormItem>
+                        <FormItem label="剩余电量">
+                            {this.state.closeOrderInfo.battery + "%"}
+                        </FormItem>
+                        <FormItem label="行程开始时间" >
+                            {this.state.closeOrderInfo.start_time}
+                        </FormItem>
+                        <FormItem label="当前位置">
+                            {this.state.closeOrderInfo.location}
+                        </FormItem>
+                    </Form>
+
+                </Modal>
 
             </div>
         );
@@ -150,26 +269,26 @@ class TopForm extends Component {
 
 
     handleQuery = () => {
-        let param=this.props.form.getFieldsValue()
+        let param = this.props.form.getFieldsValue()
         console.log(this.props.form.getFieldsValue())
         this.props.handleQuery(param)
     }
 
 
     render() {
-  
+
 
         const { getFieldDecorator } = this.props.form
         return (
- 
+
             <Form
 
 
                 layout="inline">
                 <FormItem label="城市">
                     {
-                        getFieldDecorator("city_id",{
-               
+                        getFieldDecorator("city_id", {
+
                         })(
                             <Select placeholder="全部" style={{ width: 100 }}>
                                 <Option value="0">全部</Option>
@@ -184,10 +303,10 @@ class TopForm extends Component {
 
                 <FormItem >
                     {
-                        getFieldDecorator("start_time",{
-                           
+                        getFieldDecorator("start_time", {
+
                         })(
-                            <DatePicker placeholder="请选择开始时间"/>
+                            <DatePicker placeholder="请选择开始时间" />
                         )
                     }
                 </FormItem>
@@ -195,7 +314,7 @@ class TopForm extends Component {
                 <FormItem >
                     {
                         getFieldDecorator("end_time")(
-                            <DatePicker  placeholder="请选择结束时间"/>
+                            <DatePicker placeholder="请选择结束时间" />
                         )
                     }
                 </FormItem>
@@ -219,7 +338,7 @@ class TopForm extends Component {
                     <Button onClick={this.handleReSet}>重置</Button>
                 </FormItem>
             </Form>
-            
+
         );
     }
 }
