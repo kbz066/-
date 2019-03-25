@@ -23,7 +23,16 @@ export default class Details extends Component {
                 this.setState({
                     orderInfo: res.data.result
                 })
+                this.renderMap(res.data)
             })
+    }
+
+    renderMap = (result) => {
+        var map = new window.BMap.Map("allmap");
+        // 创建地图实例  
+        var point = new window.BMap.Point(116.404, 39.915);
+        // 创建点坐标  
+        map.centerAndZoom(point, 15);
     }
 
     render() {
@@ -46,7 +55,7 @@ export default class Details extends Component {
                 </Row>
                 <Card className="content">
                     <Button type="primary">原始轨迹</Button>
-                    <div className="orderDetailMap" />
+                    <div className="orderDetailMap" id="allmap"/>
                     <div className="detail_items">
                         <div className="item-title">基础信息</div>
                         <ul>
@@ -92,7 +101,7 @@ export default class Details extends Component {
                             </li>
                             <li>
                                 <div className="detail-form-left">行驶里程</div>
-                                <div className="detail-form-content">{orderInfo.distance/1000}公里</div>
+                                <div className="detail-form-content">{orderInfo.distance / 1000}公里</div>
 
                             </li>
 
