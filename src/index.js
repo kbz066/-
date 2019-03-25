@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 import App from './App';
 
-import MyRoute from './pages/dome/route/MyRoute'
 
 
 

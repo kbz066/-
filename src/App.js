@@ -53,7 +53,7 @@ class App extends Component {
 
           </Admin>} />
           <Route path="/login" component={Login} />
-          <Route  path="/order/details"  component={Details}/>   
+          <Route  path="/order/details/:id"  component={Details}/>   
         </Switch>
       </HashRouter>
 

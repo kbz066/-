@@ -81,9 +81,6 @@ export default class Order extends Component {
             ...modalContent
         })
 
-        console.log("         ", selectedRowKeys)
-
-
     }
 
 
@@ -112,7 +109,7 @@ export default class Order extends Component {
 
     handleOpenOrderDetails=()=>{
 
-        window.open("/#/order/details","_blank")
+        window.open("/#/order/details/"+this.state.record.id,"_blank")
 
     }
 
