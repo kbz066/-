@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Card, Form, Select, Button, Modal, Table, Radio } from 'antd';
 import Axios from '../../axios/axios';
 import utils from '../../utils/utils';
+import FilterForm from "../../components/BaseForm"
 
 
 const FormItem = Form.Item;
@@ -22,14 +23,14 @@ export default class City extends Component {
 
 
 
-    getCityList = () => {
+    getCityList = (parameter) => {
 
         Axios.ajax({
             type: "get",
             url: "city/list",
             data: {
                 isShowLoading: true,
-
+                parameter
             }
 
 
@@ -155,12 +156,79 @@ export default class City extends Component {
 
 
         ]
+
+        
+        const formList=[
+            {
+                id:0,
+                type:"SELECT",
+                placeholder:"全部",
+                label:"城市",
+                optionValues:[
+                    {key:0,value:"全部"},
+                    {key:1,value:"北京市"},
+                    {key:2,value:"天津市"},
+                    {key:3,value:"广州市"},
+      
+                ],
+                width:100,
+                field:"city_id",
+                initialValue:0
+  
+            },
+            {
+                id:1,
+                type:"SELECT",
+                placeholder:"全部",
+                label:"用车模式",
+                optionValues:[
+                    {key:0,value:"全部"},
+                    {key:1,value:"指定停车点模式"},
+                    {key:2,value:"禁停区模式"},
+        
+                ],
+                width:120,
+                field:"mode",
+                initialValue:0
+            },
+            {
+                id:2,
+                type:"SELECT",
+                placeholder:"全部",
+                label:"营运模式",
+                optionValues:[
+                    {key:0,value:"全部"},
+                    {key:1,value:"自营"},
+                    {key:2,value:"加盟"},
+        
+                ],
+                width:80,
+                field:"op_mode",
+                initialValue:0
+            },
+            {
+                id:3,
+                type:"SELECT",
+                placeholder:"全部",
+                label:"加盟商授权状态",
+                optionValues:[
+                    {key:0,value:"全部"},
+                    {key:1,value:"已授权"},
+                    {key:2,value:"未授权"},
+        
+                ],
+                width:100,
+                field:"auth_status",
+                initialValue:0
+            }
+        ]
         return (
 
             <div>
 
                 <Card >
-                    <TopForm getCityList={this.getCityList} />
+                    <FilterForm formList={formList} filterSubmit={this.getCityList}/>
+                    {/* <TopForm getCityList={this.getCityList} /> */}
                 </Card>
 
                 <Card style={{ marginTop: 10 }}>
@@ -217,6 +285,8 @@ class TopForm extends Component {
 
     render() {
 
+
+        
         const { getFieldDecorator } = this.props.form
         return (
             <Form
@@ -230,7 +300,7 @@ class TopForm extends Component {
                                 <Option value="0">全部</Option>
                                 <Option value="1">北京市</Option>
                                 <Option value="2">天津市</Option>
-                                <Option value="2">广州市</Option>
+                                <Option value="3">广州市</Option>
                             </Select>
                         )
                     }

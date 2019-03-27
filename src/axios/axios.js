@@ -36,7 +36,7 @@ export default class Axios {
                 method: options.type||"get",
                 url: options.url,
                 timeout: 5000,
-                params:options.data,
+                params:options.data.parameter,
                 baseURL
             }).then((res)=>{
                 

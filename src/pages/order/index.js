@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Card, Form, Button, Select, DatePicker, Table, Modal, message } from 'antd';
 import Axios from '../../axios/axios';
-
+import FilterForm from "../../components/BaseForm"
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -22,7 +22,7 @@ export default class Order extends Component {
         this.getOrderList()
     }
 
-    getOrderList = (param) => {
+    getOrderList = (parameter) => {
 
 
         Axios.ajax({
@@ -30,7 +30,7 @@ export default class Order extends Component {
             url: "order/list",
             data: {
                 isShowLoading: true,
-                ...param
+                parameter
             }
 
 
@@ -115,6 +115,8 @@ export default class Order extends Component {
 
 
     render() {
+
+
         const rowSelection = {
             type: "radio",
             onChange: (electedRowKeys, selectedRows) => {
@@ -191,10 +193,57 @@ export default class Order extends Component {
       
         }
     
+
+        const formList=[
+            {
+                id:0,
+                type:"SELECT",
+                placeholder:"全部",
+                label:"城市",
+                optionValues:[
+                    {key:0,value:"全部"},
+                    {key:1,value:"北京"},
+                    {key:2,value:"天津"},
+                    {key:3,value:"广州"},
+                    {key:4,value:"上海"},
+      
+                ],
+                width:100,
+                field:"city_id",
+                initialValue:0
+  
+            },
+            {
+                id:1,
+                type:"TIME",
+                // start_time:"2019-01-23",
+                // end_time:"2019-12-26"
+                startPlaceholder:"请选择开始时间",
+                endPlaceholder:"请选择结束时间"
+  
+            },
+            {
+                id:2,
+                type:"SELECT",
+                placeholder:"全部",
+                label:"订单状态",
+                optionValues:[
+                    {key:0,value:"全部"},
+                    {key:1,value:"进行中"},
+                    {key:2,value:"进行中(临时锁车)"},
+                    {key:3,value:"行程结束"},
+      
+                ],
+                width:100,
+                field:"status",
+                initialValue:0
+  
+            },
+        ]
         return (
             <div>
                 <Card >
-                    <TopForm handleQuery={this.getOrderList} />
+                    <FilterForm  formList={formList} filterSubmit={this.getOrderList} />
                 </Card>
                 <Card style={{ marginTop: 10 }}>
                     <Button type="primary" onClick={this.handleOpenOrderDetails}>订单详情</Button>
