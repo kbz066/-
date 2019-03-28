@@ -21,7 +21,7 @@ import RichText from './pages/rich/index'
 import City from './pages/city/index'
 import Order from './pages/order/index'
 import Details from './pages/order/details'
-
+import User from './pages/user/index'
 
 import Admin from './admin'
 class App extends Component {
@@ -48,7 +48,7 @@ class App extends Component {
               <Route  path="/admin/rich"  component={RichText}/>   
               <Route  path="/admin/city"  component={City}/>   
               <Route  path="/admin/order"  component={Order}/>   
- 
+              <Route  path="/admin/user"  component={User}/>   
 
 
           </Admin>} />
