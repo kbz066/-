@@ -22,6 +22,9 @@ import City from './pages/city/index'
 import Order from './pages/order/index'
 import Details from './pages/order/details'
 import User from './pages/user/index'
+import BikeMap from './pages/map/bikeMap'
+
+
 
 import Admin from './admin'
 class App extends Component {
@@ -49,6 +52,8 @@ class App extends Component {
               <Route  path="/admin/city"  component={City}/>   
               <Route  path="/admin/order"  component={Order}/>   
               <Route  path="/admin/user"  component={User}/>   
+              <Route  path="/admin/BikeMap"  component={BikeMap}/>   
+
 
 
           </Admin>} />

@@ -34,6 +34,8 @@ class FilterForm extends Component {
                     formList.map((item) => {
 
 
+                        console.log(item.id)
+                        console.log(item.label)
                         if (item.type == "SELECT") {
 
                             let select =
