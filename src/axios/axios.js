@@ -23,49 +23,49 @@ export default class Axios {
         }
     }
 
-    static  ajax(options){
+    static ajax(options) {
 
-        const baseURL=" https://www.easy-mock.com/mock/5c8c9258800fbb7305fd8117/dancheApi"
+        const baseURL = " https://www.easy-mock.com/mock/5c8c9258800fbb7305fd8117/dancheApi"
 
 
-        if(options.data&&options.data.isShowLoading===true){
-            document.getElementById("ajaxLoading").style.display="block"
+        if (options.data && options.data.isShowLoading === true) {
+            document.getElementById("ajaxLoading").style.display = "block"
         }
-        return new Promise(function(resolve, reject){
+        return new Promise(function (resolve, reject) {
             axios({
-                method: options.type||"get",
+                method: options.type || "get",
                 url: options.url,
                 timeout: 5000,
-                params:options.data.parameter,
+                params: options.data ? options.data.parameter: {},
                 baseURL
-            }).then((res)=>{
-                
-                if(options.data&&options.data.isShowLoading===true){
-                    document.getElementById("ajaxLoading").style.display="none"
+            }).then((res) => {
+
+                if (options.data && options.data.isShowLoading === true) {
+                    document.getElementById("ajaxLoading").style.display = "none"
                 }
 
-                if(res.status=="200"){
+                if (res.status == "200") {
 
 
-                    if(res.data.code=="0"){
+                    if (res.data.code == "0") {
                         resolve(res)
-                    }else{
+                    } else {
                         Modal.info({
-                            title:"提示",
-                            content:res.data.msg
+                            title: "提示",
+                            content: res.data.msg
                         })
                     }
 
-                }else{
-                    reject(res) 
+                } else {
+                    reject(res)
                 }
 
             })
-            .catch((e)=>{
-                if(options.data&&options.data.isShowLoading===true){
-                    document.getElementById("ajaxLoading").style.display="none"
-                }
-            })
+                .catch((e) => {
+                    if (options.data && options.data.isShowLoading === true) {
+                        document.getElementById("ajaxLoading").style.display = "none"
+                    }
+                })
         })
     }
 }
