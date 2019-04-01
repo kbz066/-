@@ -85,7 +85,8 @@ export default class Bar extends Component {
             // 展开字段集
             key: "key",
             // key字段
-            value: "value" // value字段
+            value: "value", // value字段
+
         });
 
 
@@ -102,7 +103,7 @@ export default class Bar extends Component {
                             }}
                         />
                         <Geom
-                            type="interval"
+                            type="pointStack"
                             position="week*sales"
                             tooltip={['week*sales', (week, sales) => {
                                 return {
