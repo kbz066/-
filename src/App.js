@@ -24,6 +24,8 @@ import Details from './pages/order/details'
 import User from './pages/user/index'
 import BikeMap from './pages/map/bikeMap'
 
+import Bar from './pages/bizcharts/bar'
+
 
 
 import Admin from './admin'
@@ -53,7 +55,7 @@ class App extends Component {
               <Route  path="/admin/order"  component={Order}/>   
               <Route  path="/admin/user"  component={User}/>   
               <Route  path="/admin/BikeMap"  component={BikeMap}/>   
-
+              <Route  path="/admin/charts/bar"  component={Bar}/>   
 
 
           </Admin>} />
