@@ -103,7 +103,7 @@ export default class Bar extends Component {
                             }}
                         />
                         <Geom
-                            type="pointStack"
+                            type="interval"
                             position="week*sales"
                             tooltip={['week*sales', (week, sales) => {
                                 return {
@@ -113,6 +113,9 @@ export default class Bar extends Component {
                                     value: sales
                                 };
                             }]}
+
+                            
+                     
                         />
                     </Chart>
 
