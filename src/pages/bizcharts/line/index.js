@@ -104,7 +104,7 @@ export default class Line extends Component {
             value: {
               min: 500
             },
-            count: {
+            item: {
               range: [0, 1]
             }
           };
