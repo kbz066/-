@@ -23,27 +23,43 @@ export default class Header extends Component {
 
         }, 1000);
         this.getWeatherApiData()
+
     }
     componentWillUnmount(){
         clearInterval(this.timeTimer)
     }
 
     getWeatherApiData = async () => {
-        let res = await axios.request({
-            type: "get",
-            url: "https://restapi.amap.com/v3/weather/weatherInfo?key=b21008644c3772a350df79f46dce6483&city=440100"
-        })
-        console.log(res.data.lives[0].city)
-        if (res.status == 200) {
-            this.setState({
-                weather_detail: res.data.lives[0].weather,
-                city: res.data.lives[0].city
-            })
 
+        let cityRes = await axios.request({
+            type: "get",
+            url: "https://restapi.amap.com/v3/ip?key=b21008644c3772a350df79f46dce6483"
+        })
+        
+
+        if (cityRes.status == 200) {
+
+         
+            let res = await axios.request({
+                type: "get",
+                url: `https://restapi.amap.com/v3/weather/weatherInfo?key=b21008644c3772a350df79f46dce6483&city=${cityRes.data.adcode}`
+            })
+      
+            if (res.status == 200) {
+                this.setState({
+                    weather_detail: res.data.lives[0].weather,
+                    city: res.data.lives[0].city
+                })
+    
+            }
         }
+   
 
 
     }
+
+
+
     render() {
         return (
             <div className="hender-main">
