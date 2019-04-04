@@ -38,6 +38,7 @@ export default class Permission extends Component {
                 })
             })
     }
+    
     onRowClick = (selectItem, index) => {
         let selectKey = [index];
 
