@@ -38,40 +38,42 @@ class App extends Component {
       <HashRouter>
         <Switch>
 
-          <Route path="/login" component={Login} />
-          <Route path="/order/details/:id" component={Details} />
+        
+          <Route path="/order/details/:id"  component={Details} />
 
-          <Route path="/" render={() => <Admin>
-            <Route path="/ui/buttons" component={Buttons} />
-            <Route path="/ui/modals" component={Modals} />
-            <Route path="/ui/loadings" component={Loadings} />
-            <Route path="/ui/notification" component={Notifications} />
-            <Route path="/ui/messages" component={Messages} />
-            <Route path="/ui/tabs" component={Tabs} />
-            <Route path="/ui/gallery" component={Gallerys} />
-            <Route path="/ui/carousel" component={Carousels} />
+          <Route path="/admin"   render={() => <Admin>
+            <Route path="/admin/ui/buttons" component={Buttons} />
+            <Route path="/admin/ui/modals" component={Modals} />
+            <Route path="/admin/ui/loadings" component={Loadings} />
+            <Route path="/admin/ui/notification" component={Notifications} />
+            <Route path="/admin/ui/messages" component={Messages} />
+            <Route path="/admin/ui/tabs" component={Tabs} />
+            <Route path="/admin/ui/gallery" component={Gallerys} />
+            <Route path="/admin/ui/carousel" component={Carousels} />
 
-            <Route path="/form/login" component={FormLogin} />
-            <Route path="/form/reg" component={FormRegister} />
+            <Route path="/admin/form/login" component={FormLogin} />
+            <Route path="/admin/form/reg" component={FormRegister} />
 
-            <Route path="/table/basic" component={BasicsTable} />
+            <Route path="/admin/table/basic" component={BasicsTable} />
 
-            <Route path="/table/hight" component={SeniorTable} />
-            <Route path="/rich" component={RichText} />
-            <Route path="/city" component={City} />
-            <Route path="/order" component={Order} />
-            <Route path="/user" component={User} />
-            <Route path="/BikeMap" component={BikeMap} />
-            <Route path="/charts/bar" component={Bar} />
-            <Route path="/charts/pie" component={Pie} />
-            <Route path="/charts/line" component={Line} />
-            <Route path="/permission" component={Permission} />
-
-            <Route component={Home}/>
+            <Route path="/admin/table/hight" component={SeniorTable} />
+            <Route path="/admin/rich" component={RichText} />
+            <Route path="/admin/city" component={City} />
+            <Route path="/admin/order" component={Order} />
+            <Route path="/admin/user" component={User} />
+            <Route path="/admin/BikeMap" component={BikeMap} />
+            <Route path="/admin/charts/bar" component={Bar} />
+            <Route path="/admin/charts/pie" component={Pie} />
+            <Route path="/admin/charts/line" component={Line} />
+            <Route path="/admin/permission" component={Permission} />
+            <Route path="/admin/home" component={Home} />
+            
+           
+   
 
 
           </Admin>} />
-
+          <Route path="/" component={Login} />
         </Switch>
       </HashRouter>
 
