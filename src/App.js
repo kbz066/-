@@ -69,10 +69,8 @@ class App extends Component {
             <Route path="/admin/home" component={Home} />
             
            
-   
-
-
           </Admin>} />
+          <Route path="/BikeMap" component={BikeMap} />
           <Route path="/" component={Login} />
         </Switch>
       </HashRouter>
