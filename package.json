@@ -14,6 +14,7 @@
     "babel-loader": "8.0.5",
     "babel-plugin-import": "^1.11.0",
     "babel-plugin-named-asset-import": "^0.3.1",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-react-app": "^7.0.2",
     "bfj": "6.1.1",
     "bizcharts": "^3.5.2",
@@ -78,7 +79,7 @@
   "browserslist": [
     ">0.2%",
     "not dead",
-    "not ie <= 11",
+    "not ie < 11",
     "not op_mini all"
   ],
   "jest": {
@@ -130,5 +131,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.4.3"
   }
 }
