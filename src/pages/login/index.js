@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import "./login.less"
 
-import ReactCanvasNest from 'react-canvas-nest';
+import ReactCanvasNest from './effects';
 
 import { withRouter } from 'react-router-dom'
 
@@ -40,12 +40,14 @@ class Login extends Component {
     }
     render() {
 
+
+        console.log("object->>>>>>>>   "+ReactCanvasNest)
         const { getFieldDecorator } = this.props.form
         return (
 
 
             <Form className="wrap" >
-                <ReactCanvasNest config={{ pointColor: ' 255, 255, 255 ', lineColor: "95,121,133" }} style={{ zIndex: 99, pointerEvents: "none" }} />
+                <ReactCanvasNest config={{ pointColor: ' 255, 255, 255 ', lineColor: "95,121,133" ,pointR:2,lineWidth:3}} style={{ zIndex: 99, pointerEvents: "none" }} />
                 <Row type="flex" align="middle" style={{ height: "100vh" }}>
                     <Col span={24} style={{ marginBottom: 100 }}>
                         <Row><Col className="title">欢迎你</Col></Row>
